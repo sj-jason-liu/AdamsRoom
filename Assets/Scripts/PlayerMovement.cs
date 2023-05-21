@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed = 5f;
-    public Transform cameraTransform; // Reference to the camera transform
+    public float rotationSpeed = 100f;
+    public float rotationSmoothing = 10f; // Smoothing factor for rotation
 
-    private Rigidbody rb;
+    private Quaternion targetRotation; // Target rotation for smoothing
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        targetRotation = transform.localRotation;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         // Read input axes
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -23,14 +25,17 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement vector
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * movementSpeed * Time.deltaTime;
 
-        // Convert camera's forward direction to the character's local space
-        Vector3 cameraForward = cameraTransform.forward;
-        cameraForward.y = 0f; // Ignore vertical rotation
+        // Apply movement to local position
+        transform.localPosition += transform.TransformDirection(movement);
 
-        // Rotate movement vector based on camera's forward direction
-        movement = Quaternion.LookRotation(cameraForward) * movement;
+        // Rotate character based on mouse movement
+        float mouseX = Input.GetAxis("Mouse X");
+        float rotationAmount = mouseX * rotationSpeed * Time.deltaTime;
 
-        // Apply movement to the rigidbody
-        rb.MovePosition(transform.position + movement);
+        // Update target rotation for smoothing
+        targetRotation *= Quaternion.Euler(0f, rotationAmount, 0f);
+
+        // Smoothly rotate character towards the target rotation
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSmoothing * Time.deltaTime);
     }
 }
