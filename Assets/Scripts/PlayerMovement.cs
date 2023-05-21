@@ -10,10 +10,12 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSmoothing = 10f; // Smoothing factor for rotation
 
     private Quaternion targetRotation; // Target rotation for smoothing
+    private Animator _animator;
 
     private void Start()
     {
         targetRotation = transform.localRotation;
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -24,6 +26,16 @@ public class PlayerMovement : MonoBehaviour
 
         // Calculate movement vector
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * movementSpeed * Time.deltaTime;
+
+        _animator.SetFloat("Walking", Mathf.Abs(verticalInput));
+        if(horizontalInput > 0)
+        {
+            _animator.SetFloat("WalkingRight", horizontalInput);
+        }
+        else if(horizontalInput < 0)
+        {
+            _animator.SetFloat("WalkingLeft", horizontalInput);
+        }
 
         // Apply movement to local position
         transform.localPosition += transform.TransformDirection(movement);
