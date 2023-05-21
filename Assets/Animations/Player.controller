@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: WalkingLeft
+    m_ConditionEvent: WalkingHorizontal
     m_EventTreshold: -0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8934847001470119679}
@@ -90,7 +90,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: WalkingRight
+    m_ConditionEvent: WalkingHorizontal
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6850068845830611758}
@@ -152,13 +152,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: WalkingRight
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: WalkingLeft
+  - m_Name: WalkingHorizontal
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -186,7 +180,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: WalkingRight
+    m_ConditionEvent: WalkingHorizontal
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6718824969187835663}
@@ -239,8 +233,8 @@ AnimatorStateTransition:
     m_ConditionEvent: Walking
     m_EventTreshold: 0.1
   - m_ConditionMode: 3
-    m_ConditionEvent: WalkingRight
-    m_EventTreshold: 0.1
+    m_ConditionEvent: WalkingHorizontal
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6718824969187835663}
   m_Solo: 0
@@ -318,7 +312,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Walking
+    m_ConditionEvent: WalkingHorizontal
     m_EventTreshold: -0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6850068845830611758}
@@ -346,8 +340,8 @@ AnimatorStateTransition:
     m_ConditionEvent: Walking
     m_EventTreshold: 0.1
   - m_ConditionMode: 4
-    m_ConditionEvent: WalkingLeft
-    m_EventTreshold: -0.1
+    m_ConditionEvent: WalkingHorizontal
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8934847001470119679}
   m_Solo: 0
@@ -370,7 +364,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Left Strafe Walk
-  m_Speed: -1
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7669646460755955030}
@@ -378,7 +372,7 @@ AnimatorState:
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
-  m_Mirror: 0
+  m_Mirror: 1
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0

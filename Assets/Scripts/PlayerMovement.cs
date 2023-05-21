@@ -30,11 +30,11 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("Walking", Mathf.Abs(verticalInput));
         if(horizontalInput > 0)
         {
-            _animator.SetFloat("WalkingRight", horizontalInput);
+            _animator.SetFloat("WalkingHorizontal", horizontalInput);
         }
         else if(horizontalInput < 0)
         {
-            _animator.SetFloat("WalkingLeft", horizontalInput);
+            _animator.SetFloat("WalkingHorizontal", horizontalInput);
         }
 
         // Apply movement to local position
