@@ -5,43 +5,63 @@ using UnityEngine;
 public class PlayerControl2D : MonoBehaviour
 {
     public float moveSpeed = 5f;  // The speed at which the player moves
-    public float jumpForce = 5f;  // The force applied to make the player jump
-    public float gravity = -9.81f;  // The gravity applied to the player
 
     private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool isGrounded;
+    private SpriteRenderer spriteRenderer;
+    private Animator anim;
+    private Vector3 movement, velocity;
+
+    [SerializeField]
+    private float _gravity = 1f;
+    [SerializeField]
+    private float _jumpHeight = 15f;
+    private float _yVelocity;
+
+    private bool isJumping;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
         // Player movement
         float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0f);
-        movement = transform.TransformDirection(movement);
-        movement *= moveSpeed;
-
-        // Player jumping
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if(controller.isGrounded)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpForce * -3.0f * gravity);
+            movement = new Vector3(moveHorizontal, 0f, 0f);
+            velocity = movement * moveSpeed;
+            anim.SetFloat("Running", Mathf.Abs(moveHorizontal));
+
+            if (moveHorizontal != 0)
+            {
+                bool isFliping = movement.x > 0 ? false : true;
+                spriteRenderer.flipX = isFliping;
+            }
+
+            if(isJumping)
+            {
+                isJumping = false;
+                anim.SetBool("isJumping", isJumping);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _yVelocity += _jumpHeight;
+                isJumping = true;
+                anim.SetBool("isJumping", isJumping);
+            }
+        }
+        else
+        {
+            _yVelocity -= _gravity;
         }
 
-        playerVelocity.y += gravity * Time.deltaTime;
-        controller.Move(movement * Time.deltaTime);
-        controller.Move(playerVelocity * Time.deltaTime);
-
-        // Check if the player is grounded
-        isGrounded = controller.isGrounded;
-        if (isGrounded && playerVelocity.y < 0f)
-        {
-            playerVelocity.y = 0f;
-        }
+        velocity.y = _yVelocity;
+        controller.Move(velocity * Time.deltaTime);
     }
 }
