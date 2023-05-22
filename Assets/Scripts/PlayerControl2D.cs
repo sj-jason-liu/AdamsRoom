@@ -30,30 +30,27 @@ public class PlayerControl2D : MonoBehaviour
     {
         // Player movement
         float moveHorizontal = Input.GetAxis("Horizontal");
+        movement = new Vector3(moveHorizontal, 0f, 0f);
+        velocity = movement * moveSpeed;
 
-        if(controller.isGrounded)
+        if (moveHorizontal != 0)
         {
-            movement = new Vector3(moveHorizontal, 0f, 0f);
-            velocity = movement * moveSpeed;
+            bool isFliping = movement.x > 0 ? false : true;
+            spriteRenderer.flipX = isFliping;
+        }
+
+        if (controller.isGrounded == true)
+        {
+            isJumping = false;
+            anim.SetBool("isJumping", isJumping);
             anim.SetFloat("Running", Mathf.Abs(moveHorizontal));
 
-            if (moveHorizontal != 0)
+            if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
             {
-                bool isFliping = movement.x > 0 ? false : true;
-                spriteRenderer.flipX = isFliping;
-            }
-
-            if(isJumping)
-            {
-                isJumping = false;
-                anim.SetBool("isJumping", isJumping);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _yVelocity += _jumpHeight;
+                _yVelocity = _jumpHeight;
                 isJumping = true;
                 anim.SetBool("isJumping", isJumping);
+                Debug.Log(controller.isGrounded);
             }
         }
         else
