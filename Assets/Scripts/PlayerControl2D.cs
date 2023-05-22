@@ -28,16 +28,17 @@ public class PlayerControl2D : MonoBehaviour
 
     private void Update()
     {
+        Movement();
+    }
+
+    private void Movement()
+    {
         // Player movement
         float moveHorizontal = Input.GetAxis("Horizontal");
         movement = new Vector3(moveHorizontal, 0f, 0f);
         velocity = movement * moveSpeed;
 
-        if (moveHorizontal != 0)
-        {
-            bool isFliping = movement.x > 0 ? false : true;
-            spriteRenderer.flipX = isFliping;
-        }
+        Fliping(moveHorizontal);
 
         if (controller.isGrounded == true)
         {
@@ -60,5 +61,22 @@ public class PlayerControl2D : MonoBehaviour
 
         velocity.y = _yVelocity;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void Fliping(float moveHorizontal)
+    {
+        if (moveHorizontal != 0)
+        {
+            bool isFliping = movement.x > 0 ? false : true;
+            spriteRenderer.flipX = isFliping;
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(controller.isGrounded == false && hit.transform.tag == "Ground")
+        {
+            _yVelocity -= _gravity;
+        }
     }
 }
