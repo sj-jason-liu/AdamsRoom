@@ -28,6 +28,8 @@ public class PlayerControl2D : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.Instance.Player2DCanControl == false)
+            return;
         Movement();
     }
 

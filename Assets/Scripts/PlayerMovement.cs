@@ -20,6 +20,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.Instance.PlayerCanControl == false) //disable player control when switching to 2D
+            return;
+        Movement();
+    }
+
+    void Movement()
+    {
         // Read input axes
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -28,11 +35,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * movementSpeed * Time.deltaTime;
 
         _animator.SetFloat("Walking", Mathf.Abs(verticalInput));
-        if(horizontalInput > 0)
+        if (horizontalInput > 0)
         {
             _animator.SetFloat("WalkingHorizontal", horizontalInput);
         }
-        else if(horizontalInput < 0)
+        else if (horizontalInput < 0)
         {
             _animator.SetFloat("WalkingHorizontal", horizontalInput);
         }

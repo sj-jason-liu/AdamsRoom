@@ -20,28 +20,17 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        PlayerCanControl = true;
+        Player2DCanControl = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    //Go to bed cutscene counter
-        //if
-        //Go-to-bed Cutscene never been played
-        //play Go-to-bed Cutscene
+    public bool HasCloset { get; set; }
+    public bool HasGameConsole { get; set; }
+    public bool HasKey { get; set; }
 
-    //Object 1-closet checking bool
-    //Object 2-game console checking bool
-    //Object 3-key checking bool
-
-    //Object 1 checking function
-        //if object 1 has been collect     
-        //disable object 1 in 2D
-        //enable object 1 in 3D
-        //activate the moving platform 1
-
-    //Object 2 checking function
-        //if object 2 has been collect       
-        //disable object 2 in 2D
-        //enable object 2 in 3D
-        //activate moving platform 2
+    public bool PlayerCanControl { get; set;}
+    public bool Player2DCanControl { get; set; }
 
     //Key checking function
         //if object 3 has been collect
