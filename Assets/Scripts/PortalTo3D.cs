@@ -30,6 +30,7 @@ public class PortalTo3D : MonoBehaviour
                 }
                 GameManager.Instance.Player2DCanControl = false;
                 UIManager.Instance.WhiteOut();
+                _player3d.transform.position = _respawnPosition3d.transform.position;
                 Invoke("Switching", 3f);
                 GameManager.Instance.PlayerCanControl = true; 
             }
@@ -38,6 +39,7 @@ public class PortalTo3D : MonoBehaviour
 
     void Switching()
     {
+        Camera.main.orthographic = false;
         UIManager.Instance.SwitchTo3D();
         UIManager.Instance.WhiteIn();
     }

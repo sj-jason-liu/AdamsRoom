@@ -21,7 +21,7 @@ public class PortalTo2D : MonoBehaviour
                     goToBedCutscene.SetActive(true);
                     cutsceneHasPlayed = true;
                 }
-                UIManager.Instance.WhiteOut();
+                UIManager.Instance.WhiteOut();               
                 player2D.transform.position = respawnPosition2D.transform.position; //reposition 2D player to start point
                 GameManager.Instance.Player2DCanControl = true;
                 Invoke("Switching", 5f); //switch to 2D scene after 3 seconds- UIManager
@@ -31,6 +31,7 @@ public class PortalTo2D : MonoBehaviour
 
     void Switching()
     {
+        Camera.main.orthographic = true;
         UIManager.Instance.SwitchTo2D();
         UIManager.Instance.WhiteIn();
         goToBedCutscene.SetActive(false);
