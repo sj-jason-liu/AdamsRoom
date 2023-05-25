@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField]
-    private Transform _targetA, _targetB;
+    private Transform _targetA, _targetB, _parent2d;
     private Transform _selectedTarget;
 
     [SerializeField][Range(0, 1)]
@@ -51,5 +51,17 @@ public class MovingPlatform : MonoBehaviour
 
         if (transform.position == _targetA.position || transform.position == _targetB.position)
             _onward = !_onward;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+            other.transform.parent = transform;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+            other.transform.parent = _parent2d.transform;
     }
 }

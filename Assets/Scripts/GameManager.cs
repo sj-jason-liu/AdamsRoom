@@ -20,9 +20,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        PlayerCanControl = true;
+        PlayerCanControl = false;
         Player2DCanControl = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     public bool HasCloset { get; set; }

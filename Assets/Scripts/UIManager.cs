@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject _2dScene, _3dScene;
+    private GameObject _2dScene, _3dScene, _mainMenuPanel, _endingPanel;
 
     private Animator animator;
 
@@ -41,8 +41,6 @@ public class UIManager : MonoBehaviour
         animator.SetTrigger("WhiteOut");
     }
 
-    //enable/disable 2D scene
-    //enable/disable 3D scene
     public void SwitchTo2D()
     {
         _3dScene.SetActive(false);
@@ -53,5 +51,34 @@ public class UIManager : MonoBehaviour
     {
         _2dScene.SetActive(false);
         _3dScene.SetActive(true);
+    }
+
+    public void StartButton()
+    {
+        WhiteOut();
+        Invoke("StartGame", 3f);
+    }
+
+    void StartGame()
+    {
+        _mainMenuPanel.SetActive(false);
+        GameManager.Instance.PlayerCanControl = true;
+        WhiteIn();
+    }
+
+    public void InfoButton()
+    {
+        //enable info panel
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
+
+    public void MenuButton()
+    {
+        _mainMenuPanel.SetActive(true);
+        _endingPanel.SetActive(false);
     }
 }
