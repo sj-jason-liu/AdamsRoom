@@ -140,4 +140,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: FootstepSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: f65b8caedf0c89b4c9f6ea1408f5e362, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
