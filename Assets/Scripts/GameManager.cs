@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
         _instance = this;
         PlayerCanControl = false;
         Player2DCanControl = false;
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public bool HasCloset { get; set; }
