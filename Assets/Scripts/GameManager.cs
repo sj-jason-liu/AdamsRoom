@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
-    private bool _debugCloset, _debugGame, _debugKey;
+    private bool _debugMode, _debugCloset, _debugGame, _debugKey, _debugControl2D, _debugControl3D;
 
     private void Awake()
     {
@@ -28,9 +28,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        HasCloset = _debugCloset;
-        HasGameConsole = _debugGame;
-        HasKey = _debugKey;
+        if (_debugMode)
+        {
+            HasCloset = _debugCloset;
+            HasGameConsole = _debugGame;
+            HasKey = _debugKey;
+            Player2DCanControl = _debugControl2D;
+            PlayerCanControl = _debugControl3D;
+        }       
     }
 
     public bool HasCloset { get; set; }

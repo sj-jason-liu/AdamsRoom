@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(GameManager.Instance.PlayerCanControl == false) //disable player control when switching to 2D
             return;

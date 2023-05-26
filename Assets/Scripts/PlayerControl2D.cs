@@ -6,79 +6,89 @@ public class PlayerControl2D : MonoBehaviour
 {
     public float moveSpeed = 5f;  // The speed at which the player moves
 
-    private CharacterController controller;
     private SpriteRenderer spriteRenderer;
+    private Rigidbody _rigidbody;
+    private BoxCollider _boxCollider;
     private Animator anim;
-    private Vector3 movement, velocity;
 
-    [SerializeField]
-    private float _gravity = 1f;
     [SerializeField]
     private float _jumpHeight = 15f;
-    private float _yVelocity;
+    [SerializeField]
+    private float _groundDetectRange = 0.5f;
 
-    private bool isJumping;
+    [SerializeField]
+    private bool isGrounded;
+    private bool isJumping, _resetJump;
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _boxCollider = GetComponent<BoxCollider>();
         anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if(GameManager.Instance.Player2DCanControl == false)
+        isGrounded = IsGrounded();
+        if(Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        {
+            isJumping = true;
+            anim.SetBool("isJumping", isJumping);
+            StartCoroutine(ResetJumpRoutine());
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameManager.Instance.Player2DCanControl == false)
             return;
+        
         Movement();
     }
 
     private void Movement()
     {
-        // Player movement
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        movement = new Vector3(moveHorizontal, 0f, 0f);
-        velocity = movement * moveSpeed;
+        float moveX = Input.GetAxisRaw("Horizontal");
+        Fliping(moveX);
+        Vector3 movement = new Vector3(moveX, 0f, 0f) * moveSpeed * Time.deltaTime;
+        anim.SetFloat("Running", Mathf.Abs(moveX));
+        _rigidbody.MovePosition(transform.position + movement);
 
-        Fliping(moveHorizontal);
-
-        if (controller.isGrounded == true)
+        if (isJumping)
         {
+            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, _jumpHeight, _rigidbody.velocity.z);
             isJumping = false;
-            anim.SetBool("isJumping", isJumping);
-            anim.SetFloat("Running", Mathf.Abs(moveHorizontal));
+        }
+    }
 
-            if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+    private bool IsGrounded()
+    {
+        bool hit = Physics.Raycast(transform.position, Vector3.down, _groundDetectRange, 1 << 6);
+        if(hit)
+        {
+            if(!_resetJump)
             {
-                _yVelocity = _jumpHeight;
-                isJumping = true;
                 anim.SetBool("isJumping", isJumping);
-                Debug.Log(controller.isGrounded);
+                return true;
             }
         }
-        else
-        {
-            _yVelocity -= _gravity;
-        }
+        return false;
+    }
 
-        velocity.y = _yVelocity;
-        controller.Move(velocity * Time.deltaTime);
+    IEnumerator ResetJumpRoutine()
+    {
+        _resetJump = true;
+        yield return new WaitForSeconds(0.1f);
+        _resetJump = false;
     }
 
     private void Fliping(float moveHorizontal)
     {
         if (moveHorizontal != 0)
         {
-            bool isFliping = movement.x > 0 ? false : true;
+            bool isFliping = moveHorizontal > 0 ? false : true;
             spriteRenderer.flipX = isFliping;
-        }
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if(controller.isGrounded == false && hit.transform.tag == "Ground")
-        {
-            _yVelocity -= _gravity;
         }
     }
 }
