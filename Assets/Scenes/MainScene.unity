@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5655182, g: 0.59881955, b: 0.64741766, a: 1}
+  m_IndirectSpecularColor: {r: 0.56551844, g: 0.598819, b: 0.6474179, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2077,6 +2077,10 @@ PlayableDirector:
     value: {fileID: 2069901979}
   - key: {fileID: 2318190915098523816, guid: c5afd1c91b4b78f4fb5c990a16abcd88, type: 2}
     value: {fileID: 2069901974}
+  - key: {fileID: 5270685267058320924, guid: c5afd1c91b4b78f4fb5c990a16abcd88, type: 2}
+    value: {fileID: 484648794}
+  - key: {fileID: 8171726312561555037, guid: c5afd1c91b4b78f4fb5c990a16abcd88, type: 2}
+    value: {fileID: 256021224}
   m_ExposedReferences:
     m_References:
     - b865f7a386e4f8d41957f1bedd2ebc2e: {fileID: 1263166443}
@@ -3482,8 +3486,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectNum: 2
-  _player3d: {fileID: 484648794}
-  _respawnPosition3d: {fileID: 1576485038}
 --- !u!4 &416749399 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1362544481890875351, guid: ff74a2d207593764ea3699571e28d00a, type: 3}
@@ -4309,8 +4311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectNum: 1
-  _player3d: {fileID: 484648794}
-  _respawnPosition3d: {fileID: 1576485038}
 --- !u!1 &565711339
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,6 +6172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772a28db75742624fae7820b58537aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugCloset: 0
+  _debugGame: 0
+  _debugKey: 0
 --- !u!1001 &793801219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16023,6 +16026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endingCutscene: {fileID: 256021224}
   _3dPlayer: {fileID: 484648794}
+  _respawnPosition: {fileID: 1576485038}
 --- !u!1001 &1976326425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16313,8 +16317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectNum: 0
-  _player3d: {fileID: 484648794}
-  _respawnPosition3d: {fileID: 1576485038}
 --- !u!1001 &2018172437
 PrefabInstance:
   m_ObjectHideFlags: 0

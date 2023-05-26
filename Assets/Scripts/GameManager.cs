@@ -17,10 +17,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private bool _debugCloset, _debugGame, _debugKey;
+
     private void Awake()
     {
         _instance = this;
         ResetGame();
+    }
+
+    private void Update()
+    {
+        HasCloset = _debugCloset;
+        HasGameConsole = _debugGame;
+        HasKey = _debugKey;
     }
 
     public bool HasCloset { get; set; }

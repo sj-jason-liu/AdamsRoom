@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class PortalTo2D : MonoBehaviour
 {
-    private bool cutsceneHasPlayed, hasPressedKey;
+    private bool cutsceneHasPlayed, hasPressedKey, hasEnterTrigger;
     [SerializeField]
     private GameObject goToBedCutscene, player2D, respawnPosition2D;
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (hasEnterTrigger) //detect pressing key when enter trigger
         {
-            hasPressedKey = true;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                hasPressedKey = true;
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player" && hasPressedKey)
+        if(other.tag == "Player")
         {
-            GameManager.Instance.PlayerCanControl = false; //disable player control
-            if (!cutsceneHasPlayed)
+            hasEnterTrigger = true;
+            if (hasPressedKey)
             {
-                goToBedCutscene.SetActive(true);
-                cutsceneHasPlayed = true;
-            }
-            UIManager.Instance.WhiteOut();
-            player2D.transform.position = respawnPosition2D.transform.position; //reposition 2D player to start point
-            GameManager.Instance.Player2DCanControl = true;
-            Invoke("Switching", 5f); //switch to 2D scene after 3 seconds- UIManager 
-            hasPressedKey = false;
+                GameManager.Instance.PlayerCanControl = false; //disable player control
+                if (!cutsceneHasPlayed)
+                {
+                    goToBedCutscene.SetActive(true);
+                    cutsceneHasPlayed = true;
+                }
+                UIManager.Instance.WhiteOut();
+                player2D.transform.position = respawnPosition2D.transform.position; //reposition 2D player to start point
+                GameManager.Instance.Player2DCanControl = true;
+                Invoke("Switching", 5f); //switch to 2D scene after 3 seconds- UIManager
+                hasEnterTrigger = false;
+                hasPressedKey = false;
+            }           
         }   
     }
 
