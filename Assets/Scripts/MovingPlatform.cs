@@ -64,4 +64,9 @@ public class MovingPlatform : MonoBehaviour
         if (other.tag == "Player")
             other.transform.parent = _parent2d.transform;
     }
+
+    public void ResetPlatform()
+    {
+        transform.position = _targetB.position;
+    }
 }

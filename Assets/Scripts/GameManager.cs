@@ -20,10 +20,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        PlayerCanControl = false;
-        Player2DCanControl = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        ResetGame();
     }
 
     public bool HasCloset { get; set; }
@@ -33,7 +30,12 @@ public class GameManager : MonoBehaviour
     public bool PlayerCanControl { get; set;}
     public bool Player2DCanControl { get; set; }
 
-    //Key checking function
-        //if object 3 has been collect
-        //room door cutscene can be activate by enter trigger
+    public void ResetGame()
+    {
+        HasCloset = false;
+        HasGameConsole = false;
+        HasKey = false;
+        PlayerCanControl = false;
+        Player2DCanControl = false;
+    }
 }

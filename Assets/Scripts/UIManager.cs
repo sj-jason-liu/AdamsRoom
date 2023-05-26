@@ -64,6 +64,7 @@ public class UIManager : MonoBehaviour
         _mainMenuPanel.SetActive(false);
         GameManager.Instance.PlayerCanControl = true;
         WhiteIn();
+        Cursor.visible = false;
     }
 
     public void InfoButton()
