@@ -53,17 +53,17 @@ public class MovingPlatform : MonoBehaviour
             _onward = !_onward;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-            other.transform.parent = transform;
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Player")
+    //        other.transform.parent = transform;
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-            other.transform.parent = _parent2d.transform;
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.tag == "Player")
+    //        other.transform.parent = _parent2d.transform;
+    //}
 
     public void ResetPlatform()
     {
