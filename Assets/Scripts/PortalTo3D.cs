@@ -40,6 +40,7 @@ public class PortalTo3D : MonoBehaviour
                         break;
                 }
                 GameManager.Instance.Player2DCanControl = false;
+                TextManager.Instance.ShowInteractText("");
                 UIManager.Instance.WhiteOut();
                 Invoke("Switching", 3f);
                 GameManager.Instance.PlayerCanControl = true;

@@ -31,7 +31,9 @@ public class PlayerControl2D : MonoBehaviour
     private void Update()
     {
         isGrounded = IsGrounded();
-        if(Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (GameManager.Instance.Player2DCanControl == false)
+            return;
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             isJumping = true;
             anim.SetBool("isJumping", isJumping);

@@ -24,8 +24,10 @@ public class PortalTo2D : MonoBehaviour
         if(other.tag == "Player")
         {
             hasEnterTrigger = true;
+            TextManager.Instance.EnterBedText(hasEnterTrigger);
             if (hasPressedKey)
             {
+                TextManager.Instance.EnterBedText(false);
                 GameManager.Instance.PlayerCanControl = false; //disable player control
                 if (!cutsceneHasPlayed)
                 {
@@ -48,5 +50,13 @@ public class PortalTo2D : MonoBehaviour
         UIManager.Instance.SwitchTo2D();
         UIManager.Instance.WhiteIn();
         goToBedCutscene.SetActive(false);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            TextManager.Instance.EnterBedText(false);
+        }
     }
 }
