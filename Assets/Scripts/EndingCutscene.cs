@@ -32,6 +32,7 @@ public class EndingCutscene : MonoBehaviour
                 _3dPlayer.SetActive(false);
                 _endingCutscene.SetActive(true);
                 Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 _3dPlayer.transform.position = _respawnPosition.transform.position;
                 _3dPlayer.transform.rotation = _respawnPosition.transform.rotation;
                 GameManager.Instance.ResetGame(); //reset all bool from GameManager                

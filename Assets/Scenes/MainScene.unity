@@ -1536,7 +1536,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -0.00012207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &168851277
 MonoBehaviour:
@@ -1558,7 +1558,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Time to go. I should change some clothes and bring my game console.
+  m_text: "My dresser and game console are gone! \nI need to find them back before
+    I leave."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -1585,13 +1586,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.5
-  m_fontSizeBase: 56.5
+  m_fontSize: 57.16
+  m_fontSizeBase: 57.16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10809,6 +10810,8 @@ MonoBehaviour:
   _3dScene: {fileID: 1598922724}
   _mainMenuPanel: {fileID: 1901586747}
   _endingPanel: {fileID: 2069901974}
+  _whiteBG: {fileID: 1020994354}
+  _openingText: {fileID: 1247840507}
 --- !u!1001 &1124066426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10930,7 +10933,7 @@ MonoBehaviour:
   m_Follow: {fileID: 540675060}
   m_Lens:
     FieldOfView: 14.2
-    OrthographicSize: 1
+    OrthographicSize: 1.2
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -11907,13 +11910,15 @@ GameObject:
   - component: {fileID: 1247840508}
   - component: {fileID: 1247840510}
   - component: {fileID: 1247840509}
+  - component: {fileID: 1247840511}
+  - component: {fileID: 1247840512}
   m_Layer: 5
   m_Name: OpeningText_panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1247840508
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11932,8 +11937,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 18, y: 235}
-  m_SizeDelta: {x: -937.4052, y: -866.2094}
+  m_AnchoredPosition: {x: 18, y: 242}
+  m_SizeDelta: {x: -693.6273, y: -866.2094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1247840509
 MonoBehaviour:
@@ -11948,7 +11953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.44705883}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11973,6 +11978,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247840507}
   m_CullTransparentMesh: 1
+--- !u!225 &1247840511
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247840507}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!95 &1247840512
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247840507}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e28598c3653266f4b9e303beb32e5b97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1252387859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17038,7 +17075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1901586748
 RectTransform:
   m_ObjectHideFlags: 0

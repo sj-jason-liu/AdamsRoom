@@ -18,14 +18,14 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject _2dScene, _3dScene, _mainMenuPanel, _endingPanel;
+    private GameObject _2dScene, _3dScene, _mainMenuPanel, _endingPanel, _whiteBG, _openingText;
 
     private Animator animator;
 
     private void Awake() 
     {
         _instance = this;
-        animator = GetComponentInChildren<Animator>();
+        animator = _whiteBG.GetComponent<Animator>();
         if(animator == null)
             Debug.LogError("Animator is NULL!");    
     }
@@ -61,15 +61,7 @@ public class UIManager : MonoBehaviour
 
     void StartGame()
     {
-        _mainMenuPanel.SetActive(false);
-        GameManager.Instance.PlayerCanControl = true;
-        WhiteIn();
-        Cursor.visible = false;
-    }
-
-    public void InfoButton()
-    {
-        //enable info panel
+        StartCoroutine(StartGameRouting());     
     }
 
     public void ExitButton()
@@ -81,5 +73,18 @@ public class UIManager : MonoBehaviour
     {
         _mainMenuPanel.SetActive(true);
         _endingPanel.SetActive(false);
+    }
+
+    IEnumerator StartGameRouting()
+    {
+        _mainMenuPanel.SetActive(false);
+        WhiteIn();
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Opening text playing now.");
+        _openingText.GetComponent<Animator>().SetTrigger("Opening"); //play opening text animation
+        yield return new WaitForSeconds(5f);
+        GameManager.Instance.PlayerCanControl = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
