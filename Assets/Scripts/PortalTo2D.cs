@@ -21,7 +21,7 @@ public class PortalTo2D : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && !GameManager.Instance.HasKey)
         {
             hasEnterTrigger = true;
             TextManager.Instance.EnterBedText(hasEnterTrigger);
