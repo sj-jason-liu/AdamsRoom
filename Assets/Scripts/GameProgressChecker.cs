@@ -26,5 +26,15 @@ public class GameProgressChecker : MonoBehaviour
             _2dGameConsole.SetActive(false);
             gameConsoleCollected = true;
         }
+
+        if(!GameManager.Instance.HasCloset && !GameManager.Instance.HasGameConsole)
+        {
+            _3dCloset.SetActive(false);
+            _3dGameConsole.SetActive(false);
+            _2dCloset.SetActive(true);
+            _2dGameConsole.SetActive(true);
+            closetCollected = false;
+            gameConsoleCollected = false;
+        }
     }
 }

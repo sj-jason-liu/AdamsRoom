@@ -25,9 +25,11 @@ public class EndingCutscene : MonoBehaviour
         if(other.tag == "Player" && GameManager.Instance.HasKey)
         {
             hasEnterTrigger = true;
+            TextManager.Instance.LeavingRoomText(hasEnterTrigger);
             if (hasPressedKey)
             {
                 hasPressedKey = false;
+                TextManager.Instance.LeavingRoomText(hasPressedKey);
                 GameManager.Instance.PlayerCanControl = false;
                 _3dPlayer.SetActive(false);
                 _endingCutscene.SetActive(true);
@@ -38,5 +40,13 @@ public class EndingCutscene : MonoBehaviour
                 GameManager.Instance.ResetGame(); //reset all bool from GameManager                
             }
         }    
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            TextManager.Instance.LeavingRoomText(false);
+        }
     }
 }

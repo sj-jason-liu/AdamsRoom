@@ -16,7 +16,7 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject _enterBedText, _pickUpList;
+    [SerializeField] private GameObject _enterBedText, _pickUpList, _leaveRoomText;
     private TMPro.TextMeshProUGUI _interactText, _pickUpText;
     
     private void Awake() 
@@ -32,6 +32,13 @@ public class TextManager : MonoBehaviour
     {
         if(GameManager.Instance.PlayerCanControl)
             _enterBedText.SetActive(active);
+    }
+
+    public void LeavingRoomText(bool active)
+    {
+        if (GameManager.Instance.HasKey)
+            _leaveRoomText.SetActive(active);
+
     }
 
     public void ShowInteractText(string textContent) //objects interactive text
