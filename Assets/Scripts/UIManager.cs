@@ -80,7 +80,6 @@ public class UIManager : MonoBehaviour
         _mainMenuPanel.SetActive(false);
         WhiteIn();
         yield return new WaitForSeconds(3f);
-        Debug.Log("Opening text playing now.");
         _openingText.GetComponent<Animator>().SetTrigger("Opening"); //play opening text animation
         yield return new WaitForSeconds(5f);
         GameManager.Instance.PlayerCanControl = true;
