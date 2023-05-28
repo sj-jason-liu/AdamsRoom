@@ -29,6 +29,7 @@ public class PortalTo2D : MonoBehaviour
             {
                 TextManager.Instance.EnterBedText(false);
                 GameManager.Instance.PlayerCanControl = false; //disable player control
+                UIManager.Instance.MusicFadeOut();//music fade out
                 if (!cutsceneHasPlayed)
                 {
                     goToBedCutscene.SetActive(true);
@@ -47,6 +48,7 @@ public class PortalTo2D : MonoBehaviour
     void Switching()
     {
         Camera.main.orthographic = true;
+        UIManager.Instance.MusicFadeIn(false); //change music to 2d and fade in
         UIManager.Instance.SwitchTo2D();
         UIManager.Instance.WhiteIn();
         goToBedCutscene.SetActive(false);

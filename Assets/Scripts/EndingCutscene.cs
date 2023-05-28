@@ -29,6 +29,7 @@ public class EndingCutscene : MonoBehaviour
             if (hasPressedKey)
             {
                 hasPressedKey = false;
+                UIManager.Instance.StopMusic();
                 TextManager.Instance.LeavingRoomText(hasPressedKey);
                 GameManager.Instance.PlayerCanControl = false;
                 _3dPlayer.SetActive(false);

@@ -20,14 +20,21 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _2dScene, _3dScene, _mainMenuPanel, _endingPanel, _whiteBG, _openingText;
 
+    [SerializeField]
+    private AudioClip _2dTheme, _3dTheme;
+    
     private Animator animator;
+    private AudioSource audioSource;
 
     private void Awake() 
     {
         _instance = this;
         animator = _whiteBG.GetComponent<Animator>();
         if(animator == null)
-            Debug.LogError("Animator is NULL!");    
+            Debug.LogError("Animator is NULL!");
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            Debug.LogError("AudioSource is NULL from UIManager!");
     }
 
     //Play white-in animation
@@ -75,10 +82,36 @@ public class UIManager : MonoBehaviour
         _endingPanel.SetActive(false);
     }
 
+    public void MusicFadeOut()
+    {
+        StartCoroutine(AudioHelper.FadeOut(audioSource, 2.5f));
+    }
+
+    public void MusicFadeIn(bool from2D)
+    {
+        switch(from2D)
+        {
+            case true:
+                audioSource.clip = _3dTheme;
+                break;
+            case false:
+                audioSource.clip = _2dTheme;
+                break;
+        }
+        StartCoroutine(AudioHelper.FadeIn(audioSource, 2.5f));
+    }
+
+    public void StopMusic()
+    {
+        StartCoroutine(AudioHelper.FadeOut(audioSource, 3f));
+    }
+
     IEnumerator StartGameRouting()
     {
         _mainMenuPanel.SetActive(false);
         WhiteIn();
+        audioSource.clip = _3dTheme;
+        StartCoroutine(AudioHelper.FadeIn(audioSource, 3f));
         yield return new WaitForSeconds(3f);
         _openingText.GetComponent<Animator>().SetTrigger("Opening"); //play opening text animation
         yield return new WaitForSeconds(5f);

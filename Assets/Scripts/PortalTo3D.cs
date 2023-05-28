@@ -39,6 +39,7 @@ public class PortalTo3D : MonoBehaviour
                         GameManager.Instance.HasKey = true;
                         break;
                 }
+                UIManager.Instance.MusicFadeOut(); //music fade out
                 GameManager.Instance.Player2DCanControl = false;
                 TextManager.Instance.ShowInteractText("");
                 UIManager.Instance.WhiteOut();
@@ -53,6 +54,7 @@ public class PortalTo3D : MonoBehaviour
     void Switching()
     {
         Camera.main.orthographic = false;
+        UIManager.Instance.MusicFadeIn(true); //change music to 3d and fade in
         UIManager.Instance.SwitchTo3D();
         UIManager.Instance.WhiteIn();
     }
